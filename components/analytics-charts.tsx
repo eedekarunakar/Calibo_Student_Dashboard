@@ -46,7 +46,7 @@ export function AnalyticsCharts({
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="module" />
               <YAxis domain={[0, 100]} unit="%" />
-              <Tooltip formatter={(value: number | undefined) => value == null ? "-" : `${value}%`} />
+              <Tooltip formatter={(value) => typeof value === "number" ? `${value}%` : "-"} />
               <Bar dataKey="average" name="Average" fill="#2563eb" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
@@ -65,7 +65,7 @@ export function AnalyticsCharts({
                 cx="50%"
                 cy="50%"
                 outerRadius="70%"
-                label={({ status, count }) => `${status}: ${count}`}
+                label={({ name, value }) => `${name}: ${value}`}
               >
                 {statusCounts.map((entry) => (
                   <Cell key={entry.status} fill={statusColors[entry.status]} />
